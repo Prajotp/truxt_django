@@ -79,9 +79,9 @@ WSGI_APPLICATION = "mydrfproject.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'djangologin',
-        'USER': 'root',
-        'PASSWORD': 'root',
+        'NAME': 'truxtprod',
+        'USER': 'qpkrshdxwr',
+        'PASSWORD': '3D8ZX158200JE8P0$',
         'HOST': 'localhost',
         'PORT': '3306',
     }
