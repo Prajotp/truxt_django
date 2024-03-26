@@ -82,10 +82,16 @@ DATABASES = {
         'NAME': 'truxtprod',
         'USER': 'qpkrshdxwr',
         'PASSWORD': '3D8ZX158200JE8P0$',
-        'HOST': 'localhost',
+        'HOST': 'truxt-django-demo.mysql.database.azure.com',  # Server name
         'PORT': '3306',
+        'OPTIONS': {
+            'ssl': {
+                'ca': BASE_DIR / 'BaltimoreCyberTrustRoot.crt.pem'  # Path to SSL certificate file
+            }
+        }
     }
 }
+
 
 
 # Password validation
