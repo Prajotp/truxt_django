@@ -13,7 +13,10 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
-
+from .models import Role
+from .serializers import RoleSerializer
+from rest_framework import generics
+from django.utils import timezone
 from .models import CustomUser
 @api_view(['POST'])
 def register_user(request):
@@ -60,3 +63,52 @@ def user_logout(request):
             return Response({'message': 'Successfully logged out.'}, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+
+class CustomUserListCreate(generics.ListCreateAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+
+class CustomUserRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+    
+#roles
+@api_view(['POST'])
+def add_role(request):
+    serializer = RoleSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({'success': True, 'message': 'Role added successfully'}, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def fetch_all_roles(request):
+    roles = Role.objects.all()
+    serializer = RoleSerializer(roles, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def fetch_single_role(request, role_id):
+    role = Role.objects.get(pk=role_id)
+    serializer = RoleSerializer(role)
+    return Response(serializer.data)
+
+@api_view(['PUT'])
+def update_role(request, role_id):
+    role = Role.objects.get(pk=role_id)
+    serializer = RoleSerializer(instance=role, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({'success': True, 'message': 'Role updated successfully'})
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['DELETE'])
+def delete_role(request, role_id):
+    role = Role.objects.get(pk=role_id)
+    role.delete()
+    return Response({'success': True, 'message': 'Role deleted successfully'})
+
+
+

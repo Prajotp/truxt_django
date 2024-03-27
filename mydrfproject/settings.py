@@ -79,19 +79,13 @@ WSGI_APPLICATION = "mydrfproject.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'truxtprod',
-        'USER': 'qpkrshdxwr',
-        'PASSWORD': '3D8ZX158200JE8P0$',
-        'HOST': 'truxt-django-demo.mysql.database.azure.com',  # Server name
+        'NAME': 'djangologin',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
         'PORT': '3306',
-        'OPTIONS': {
-            'ssl': {
-                'ca': BASE_DIR / 'BaltimoreCyberTrustRoot.crt.pem'  # Path to SSL certificate file
-            }
-        }
     }
 }
-
 
 
 # Password validation
@@ -105,6 +99,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
 ]
+
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 REST_FRAMEWORK = {
