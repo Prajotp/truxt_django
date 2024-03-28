@@ -146,7 +146,7 @@ plumbum==1.8.2
 ply==3.11
 portalocker==2.8.2
 pre-commit==2.21.0
--e git+https://github.com/Nav-app/EnterpriseChat.git@29822f4e013a7e0367a226b23039bd3bd6b54a0a#egg=private_gpt
+
 prompt-toolkit==3.0.43
 protobuf==4.25.1
 psutil==5.9.6
