@@ -2,10 +2,11 @@ from django.urls import path
 from .views import register_user, user_login, user_logout
 from accounts import views
 from .views import CustomUserListCreate, CustomUserRetrieveUpdateDestroy
-
+from .views import hello_brother
 
 urlpatterns = [
     path('register/', register_user, name='register'),
+      path('hello/', hello_brother, name='hello'),
     path('login/', user_login, name='login'),
     path('logout/', user_logout, name='logout'),
     path('add_role/', views.add_role),
