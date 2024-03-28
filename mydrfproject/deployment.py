@@ -31,10 +31,10 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": os.environ.get('MYSQL_DATABASE'),
-        "HOST": os.environ.get('MYSQL_HOST'),
-        "USER": os.environ.get('MYSQL_USER'),
-        "PASSWORD": os.environ.get('MYSQL_PASSWORD'),
+        "NAME": os.environ.get('AZURE_MYSQL_NAME'),
+        "HOST": os.environ.get('AZURE_MYSQL_HOST'),
+        "USER": os.environ.get('AZURE_MYSQL_USER'),
+        "PASSWORD": os.environ.get('AZURE_MYSQL_PASSWORD'),
         "PORT": os.environ.get('MYSQL_PORT', '3306'),
     }
 }
