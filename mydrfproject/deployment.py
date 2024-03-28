@@ -6,7 +6,7 @@ ALLOWED_HOSTS = [os.environ.get('WEBSITE_HOSTNAME', 'localhost')]
 CSRF_TRUSTED_ORIGINS = [f"https://{host}" for host in ALLOWED_HOSTS]
 
 # Debug should be False in production
-DEBUG = False
+DEBUG = True
 
 # Load SECRET_KEY from environment variable
 SECRET_KEY = os.environ.get("MY_SECRET_KEY")
