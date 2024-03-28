@@ -2,8 +2,8 @@ import os
 from .settings import *
 
 # Set ALLOWED_HOSTS and CSRF_TRUSTED_ORIGINS
-ALLOWED_HOSTS = [os.environ.get('WEBSITE_HOSTNAME', '')]
-CSRF_TRUSTED_ORIGINS = ["https://" + os.environ.get('WEBSITE_HOSTNAME', '')]
+ALLOWED_HOSTS = [os.environ.get('WEBSITE_HOSTNAME', 'localhost')]
+CSRF_TRUSTED_ORIGINS = [f"https://{host}" for host in ALLOWED_HOSTS]
 
 # Debug should be False in production
 DEBUG = False
@@ -23,12 +23,10 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-STORAGES = {
 
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
+# Configure static files
+STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Define database connection
 DATABASES = {
