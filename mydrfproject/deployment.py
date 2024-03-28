@@ -1,41 +1,38 @@
 import os
-from.settings import *
-from.settings import BASE_DIR
-ALLOWED_HOSTS=[os.environ['WEBSITE_HOSTNAME']]
-CSR_TRUSTED_ORIGINS =["https://"+os.environ['WEBSITE_HOSTNAME']]
-DEBUG=False
-SECRET_KEY = os.environ["MY_SECRETE_key"]
+from .settings import *
+
+# Set ALLOWED_HOSTS and CSRF_TRUSTED_ORIGINS
+ALLOWED_HOSTS = [os.environ.get('WEBSITE_HOSTNAME', '')]
+CSRF_TRUSTED_ORIGINS = ["https://" + os.environ.get('WEBSITE_HOSTNAME', '')]
+
+# Debug should be False in production
+DEBUG = False
+
+# Load SECRET_KEY from environment variable
+SECRET_KEY = os.environ.get("MY_SECRET_KEY")
+
+# Define middleware
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    #  "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-# CORS_ALLOWED_ORIGIND=[
 
-# ]
-# STORAGES = {
-
-#     "staticfiles": {
-#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-#     },
-# }
-CONNECTION=os.environ('azuar_postagral_sql')
-CONNECTION_STR={pair.split('=')[0]:pair.split('=')[1] for pair in CONNECTION.split(' ')}
-
+# Define database connection
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": CONNECTION_STR['dbname'],
-         "HOST": CONNECTION_STR['host'],
-        "USER":CONNECTION_STR['user'],
-        "PASSWORD": CONNECTION_STR['password'],
-       
-        "PORT": "5432",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": os.environ.get('MYSQL_DATABASE'),
+        "HOST": os.environ.get('MYSQL_HOST'),
+        "USER": os.environ.get('MYSQL_USER'),
+        "PASSWORD": os.environ.get('MYSQL_PASSWORD'),
+        "PORT": os.environ.get('MYSQL_PORT', '3306'),
     }
 }
-STATIC_ROOT=BASE_DIR/'staticfiles'
+
+# Define static root
+STATIC_ROOT = BASE_DIR / 'staticfiles'
