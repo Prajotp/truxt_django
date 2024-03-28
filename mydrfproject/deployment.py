@@ -18,6 +18,7 @@ MIDDLEWARE = [
 # CORS_ALLOWED_ORIGIND=[
 
 # ]
+
 STORAGES = {
 
     "staticfiles": {
