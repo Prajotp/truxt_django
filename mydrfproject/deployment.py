@@ -6,7 +6,7 @@ ALLOWED_HOSTS = [os.environ.get('WEBSITE_HOSTNAME', 'localhost')]
 CSRF_TRUSTED_ORIGINS = [f"https://{host}" for host in ALLOWED_HOSTS]
 
 # Debug should be False in production
-DEBUG = True
+DEBUG = False
 
 # Load SECRET_KEY from environment variable
 SECRET_KEY = os.environ.get("MY_SECRET_KEY")
@@ -16,7 +16,6 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
-
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
