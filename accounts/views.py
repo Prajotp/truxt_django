@@ -18,7 +18,13 @@ from .models import Role
 from .serializers import RoleSerializer
 from rest_framework import generics
 from django.utils import timezone
+from django.conf import settings
+
 from .models import CustomUser
+def database_name(request):
+    database_name = settings.DATABASES['default']['NAME']
+    return JsonResponse({'database_name': database_name})
+
 @api_view(['POST'])
 def register_user(request):
     if request.method == 'POST':
