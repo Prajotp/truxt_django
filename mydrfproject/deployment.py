@@ -1,43 +1,41 @@
 import os
-from .settings import *
-
-# Set ALLOWED_HOSTS and CSRF_TRUSTED_ORIGINS
-ALLOWED_HOSTS = [os.environ.get('WEBSITE_HOSTNAME', 'localhost')]
-CSRF_TRUSTED_ORIGINS = [f"https://{host}" for host in ALLOWED_HOSTS]
-
-# Debug should be False in production
-DEBUG = True
-
-# Load SECRET_KEY from environment variable
-SECRET_KEY = os.environ.get("MY_SECRET_KEY")
-
-# Define middleware
+from.settings import *
+from.settings import BASE_DIR
+ALLOWED_HOSTS=[os.environ['WEBSITE_HOSTNAME']]
+CSR_TRUSTED_ORIGINS =["https://"+os.environ['WEBSITE_HOSTNAME']]
+DEBUG=False
+SECRET_KEY = os.environ["MY SECETE key"]
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+# CORS_ALLOWED_ORIGIND=[
 
-# Configure static files
-STATIC_URL = '/static/'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# ]
+STORAGES = {
 
-# Define database connection
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+CONNECTION=os.environ('azuar_postagral_sql')
+CONNECTION_STR={pair.split('=')[0]:pair.split('=')[1] for pair in CONNECTION.split(' ')}
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": os.environ.get('AZURE_MYSQL_NAME'),
-        "HOST": os.environ.get('AZURE_MYSQL_HOST'),
-        "USER": os.environ.get('AZURE_MYSQL_USER'),
-        "PASSWORD": os.environ.get('AZURE_MYSQL_PASSWORD'),
-        "PORT": os.environ.get('MYSQL_PORT', '3306'),
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": CONNECTION_STR['dbname'],
+         "HOST": CONNECTION_STR['host'],
+        "USER":CONNECTION_STR['user'],
+        "PASSWORD": CONNECTION_STR['password'],
+       
+        "PORT": "5432",
     }
 }
-
-# Define static root
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT=BASE_DIR/'staticfiles'
