@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python version
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9' # Use a valid Python version here
+          python-version: '3.12' # Use a valid Python version here
 
       - name: Create and start virtual environment
         run: |
