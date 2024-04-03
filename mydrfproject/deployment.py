@@ -22,8 +22,8 @@ STORAGES = {
     },
 }
 
-CONNECTION = os.environ['azuar_postagral_sql']
-CONNECTION_STR = {pair.split('=')[0]: pair.split('=')[1] for pair in CONNECTION.split(' ')}
+CONNECTION = os.environ['azur_postagral_sql']
+CONNECTION_STR = dict(pair.split('=') for pair in CONNECTION.split(' '))
 
 DATABASES = {
     "default": {
